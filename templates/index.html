@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="with=device-width,initial-scale=1.0">
+        <title> Machine Learning API </title>
+        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+        <link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css">
+    </head>
+    <body>
+
+
+
+        <section class="header">
+            <nav>
+                <a href="index.html"> <img src="static/images/1561758980126.jpg" width="80"></a>
+                <div class="nav-links" id ="navLinks">
+                    <i class="fa fa-times" aria-hidden="true" onclick="hidemenu()"></i>
+
+                    <ul>
+                        <li><a href="#Data_details">DATA DETAILS</a></li>
+                        <li><a href="#About">ABOUT THE REGRESSION MODEL</a></li>
+                        <li><a href="#Source">SOURCE </a></li>
+                        <li><a href="#Down">DOWNLOAD</a></li>
+
+
+
+                    </ul>
+
+                </div>
+                <i class="fa fa-bars" aria-hidden="true" onclick="showmenu()"></i>
+            </nav>
+
+            
+<div class="text-box">
+    <h1> <center>Life Expectancy Prediction</center></h1>
+    <p> This model estimates life Expectancy for people of a region/area. <br> <br >Before filling out the values please check out the ranges/mean/std.deviation in Data Details section.</p> 
+    <form action="{{ url_for('predict')}}"method="post">
+        <label class="custom-field">
+        <input type="text"  name="Adult Mortality" placeholder="Adult Mortality" required="required" />
+        <input type="text" name="Alcohol" placeholder="Alcohol (litres)" required="required" />
+        <input type="text" name="Polio" placeholder="Polio" required="required" />
+        <input type="text" name="Total expenditure" placeholder="Total expenditure (% in Total)" required="required" />
+        <input type="text" name="Diphtheria " placeholder="Diphtheria " required="required" />
+        <input type="text" name="HIV/AIDS" placeholder="HIV/AIDS" required="required" />
+        <input type="text" name="Income composition of resources" placeholder="Income composition of resources " required="required" />
+        <input type="text" name="Schooling" placeholder="Schooling (years)" required="required" />
+        <br>
+        <button type="submit" class="hero-btn">Predict</button>
+        </label>
+    </form>
+
+   <br>
+   <br>
+   {{ prediction_text }}
+
+</div>
+
+        </section>
+
+<!--DATA DETAILS--->
+<section class ="about">
+    <h1 id="Data_details"> Data Details </h1>
+    <p>
+        Out of every column in our dataset with the help of Recursive Feature Elimination (RFE) technique we eliminated all the unnecessary columns. So Below attributes are the best selected ones.
+    </p>
+
+    <div class = "row1">
+
+        <div class="about-col">
+            <h3> Adult Mortality </h3>
+            <p>
+                Adult Mortality Rates of both sexes (probability of dying between 15 and 60 years per 1000 population) <br> Range in dataset :- [1,723] <br> Mean:- 164.79 <br> Std. deviation:- 124.29 
+            </p> 
+        </div>
+        <div class="about-col">
+            <h3> Alcohol </h3>
+            <p>
+                Alcohol, recorded per capita (15+) consumption (in litres of pure alcohol) <br> Range in dataset:- [0.01,17.87] <br> Mean:- 4.60 <br> Std. deviation:- 4.05 
+            </p> 
+        </div>
+        <div class="about-col">
+            <h3> Polio</h3>
+            <p>
+                Polio (Pol3) immunization coverage among 1-year-olds (%) <br> Range in dataset:- [3,99] <br> Mean:- 82.55 <br> Std. deviation:- 23.42
+            </p> 
+        </div>
+        </div>
+
+        <div class = "row2">
+
+        <div class="about-col">
+            <h3> Total expenditure</h3>
+            <p>
+                 General government expenditure on health as a percentage of total government expenditure (%) <br> Range in dataset:- [0.37,17.6] <br> Mean:- 5.94 <br> Std. deviation:- 2.50
+            </p> 
+            <div class ="row">
+                div
+            </div>
+        </div>
+
+
+        <div class="about-col">
+            <h3> Diphtheria</h3>
+            <p>
+                 Diphtheria tetanus toxoid and pertussis (DTP3) immunization coverage among 1-year-olds (%) <br> Range in dataset:- [2,99] <br> Mean:- 82.32 <br> Std. deviation:- 23.71
+            </p> 
+        </div>
+
+        <div class="about-col">
+            <h3>HIV/AIDS</h3>
+            <p>
+                 Deaths per 1 000 live births HIV/AIDS (0-4 years) <br> Range in dataset:- [0.1,50.6] <br> Mean:- 1.7 <br> Std. deviation:- 5.1
+            </p> 
+        </div>
+        </div>
+
+        <div class = "row3">
+
+        <div class="about-col">
+            <h3>Income composition of resources</h3>
+            <p>
+                 Human Development Index in terms of income composition of resources (index ranging from 0 to 1) <br> Range in dataset:- [0,0.948] <br> Mean:- 0.62 <br> Std. deviation:- 0.21
+            </p> 
+        </div>
+
+        <div class="about-col">
+            <h3>Schooling</h3>
+            <p>
+                 Number of years of Schooling(years) <br> Range in dataset:- [0,20.7] <br> Mean:- 11.99 <br> Std. deviation:- 3.35
+            </p> 
+        </div>
+    </div>
+</section>
+
+
+
+<!---About the Regression model--->
+<section class ="model" >
+<h1 id="About"> About the regression model </h1>
+    <div class="row">
+        <div class ="about-col2">
+            <br>
+            <p>Multiple linear regression (MLR), also known simply as multiple regression, is a statistical technique that uses several explanatory variables to predict the outcome of a response variable </p>
+            <img src="static/images/wordpress-google-sheets.png" >
+            <div class="layer">
+                <h3>Multi variable regression</h3>
+            </div>
+        </div>
+    </div>
+</section> 
+
+<!---Sources and links-->
+<section class="Source">
+    <h1 id="Source"> Source of Data</h1>
+    <p>
+        The Global Health Observatory (GHO) data repository under World Health Organization (WHO) keeps track of the health status as well as many other related factors for all countries The datasets are made available to public for the purpose of health data analysis. The dataset related to life expectancy, health factors for 193 countries has been collected from the same WHO data repository website and its corresponding economic data was collected from United Nation website. Among all categories of health-related factors only those critical factors were chosen which are more representative. It has been observed that in the past 15 years , there has been a huge development in health sector resulting in improvement of human mortality rates especially in the developing nations in comparison to the past 30 years. Therefore, in this project we have considered data from year 2000-2015 for 193 countries for further analysis. The individual data files have been merged together into a single dataset. On initial visual inspection of the data showed some missing values. As the datasets were from WHO, we found no evident errors. Missing data was handled in R software by using Missmap command. The result indicated that most of the missing data was for population, Hepatitis B and GDP. The missing data were from less known countries like Vanuatu, Tonga, Togo,Cabo Verde etc. Finding all data for these countries was difficult and hence, it was decided that we exclude these countries from the final model dataset. The final merged file(final dataset) consists of 22 Columns and 2938 rows which meant 20 predicting variables. All predicting variables was then divided into several broad categories:​Immunization related factors, Mortality factors, Economical factors and Social factors.
+    </p>
+    <img src="static/images/who2.jpg">
+    
+</section>
+
+
+
+<!---DOWnloadable link-->
+<section class ="Links">
+    <h1 id="Down">Download PDF to know more</h1>
+    <div class="row">
+        <a href="static/images/Life Expectancy model.pdf"  download> Download </a>
+        <p> Download pdf</p>
+    </div>
+    </section>
+
+
+<!--------JavaScript for toggle menu-------->
+        <script>
+            var navLinks=document.getElementById("navLinks")
+
+            function showmenu()
+            {
+                navLinks.style.right="0";
+            }
+
+            function hidemenu()
+            {
+                navLinks.style.right="-200px";
+            }
+
+        </script>
+    </body>
+</html>
